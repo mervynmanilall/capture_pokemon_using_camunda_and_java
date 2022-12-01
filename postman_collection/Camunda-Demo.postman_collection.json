@@ -1,0 +1,215 @@
+{
+	"info": {
+		"_postman_id": "1e37df6c-fe8e-4be8-be41-dc41bdeeb8a7",
+		"name": "Camunda-Demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Java Endpoint",
+			"item": [
+				{
+					"name": "localhost:8080/trainer-action/start",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/trainer-action/start",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"trainer-action",
+								"start"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/trainer-action/getTaskId/da472f83-681a-11ed-b38b-a21b1cf3aef0",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/trainer-action/getTaskId/898b8183-7135-11ed-9337-7e91383410bc",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"trainer-action",
+								"getTaskId",
+								"898b8183-7135-11ed-9337-7e91383410bc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/trainer-action/complete/5fa67233-681c-11ed-b38b-a21b1cf3aef0",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/trainer-action/complete/30606623-7136-11ed-9337-7e91383410bc",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"trainer-action",
+								"complete",
+								"30606623-7136-11ed-9337-7e91383410bc"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Camunda Endpoint",
+			"item": [
+				{
+					"name": "http://localhost:8081/engine-rest/process-definition/key/pokemon_capture_rules/start",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/engine-rest/process-definition/key/pokemon_capture_rules/start",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"engine-rest",
+								"process-definition",
+								"key",
+								"pokemon_capture_rules",
+								"start"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8081/engine-rest/deployment/create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "upload",
+									"type": "file",
+									"src": "/Users/mervynmanilall/Documents/capture_pokemon_using_camunda_and_java/camunda_capture_a_pokemon/src/main/resources/capture_pokemon.bpmn"
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/engine-rest/deployment/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"engine-rest",
+								"deployment",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8081/engine-rest/task/065ef246-6819-11ed-b4f8-a21b1cf3aef0/complete",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"variables\": {\n        \"isTired\": {\n            \"value\": true\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/engine-rest/task/065ef246-6819-11ed-b4f8-a21b1cf3aef0/complete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"engine-rest",
+								"task",
+								"065ef246-6819-11ed-b4f8-a21b1cf3aef0",
+								"complete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8081/engine-rest/task",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/engine-rest/task",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"engine-rest",
+								"task"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

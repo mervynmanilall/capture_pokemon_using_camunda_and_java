@@ -4,65 +4,50 @@
     <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>Flow_1bpa9e2</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:task id="Activity_0h0qw9j" name="start_searching">
-      <bpmn:incoming>Flow_1bpa9e2</bpmn:incoming>
-      <bpmn:outgoing>Flow_0i9mvrb</bpmn:outgoing>
-    </bpmn:task>
-    <bpmn:sequenceFlow id="Flow_1bpa9e2" sourceRef="StartEvent_1" targetRef="Activity_0h0qw9j" />
-    <bpmn:task id="Activity_0w9qid3" name="initiate_battle">
-      <bpmn:incoming>Flow_0i9mvrb</bpmn:incoming>
-      <bpmn:incoming>Flow_1u7u3kz</bpmn:incoming>
-      <bpmn:outgoing>Flow_0r19i0g</bpmn:outgoing>
-    </bpmn:task>
-    <bpmn:sequenceFlow id="Flow_0i9mvrb" sourceRef="Activity_0h0qw9j" targetRef="Activity_0w9qid3" />
+    <bpmn:sequenceFlow id="Flow_1bpa9e2" sourceRef="StartEvent_1" targetRef="start_searching" />
+    <bpmn:sequenceFlow id="Flow_0i9mvrb" sourceRef="start_searching" targetRef="initiate_battle" />
     <bpmn:exclusiveGateway id="Gateway_1b4s7tu" name="Is pokemon tired?">
       <bpmn:incoming>Flow_0r19i0g</bpmn:incoming>
       <bpmn:outgoing>Flow_1u7u3kz</bpmn:outgoing>
       <bpmn:outgoing>Flow_125yi2r</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:task id="Activity_1hbyset" name="throw_pokeball">
-      <bpmn:incoming>Flow_125yi2r</bpmn:incoming>
-      <bpmn:outgoing>Flow_1pxufv2</bpmn:outgoing>
-    </bpmn:task>
     <bpmn:endEvent id="Event_1csv0ux">
       <bpmn:incoming>Flow_1pxufv2</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_1pxufv2" sourceRef="Activity_1hbyset" targetRef="Event_1csv0ux" />
-    <bpmn:sequenceFlow id="Flow_0r19i0g" sourceRef="Activity_0w9qid3" targetRef="Gateway_1b4s7tu" />
-    <bpmn:sequenceFlow id="Flow_1u7u3kz" name="not_tired" sourceRef="Gateway_1b4s7tu" targetRef="Activity_0w9qid3">
+    <bpmn:sequenceFlow id="Flow_1pxufv2" sourceRef="throw_pokeball" targetRef="Event_1csv0ux" />
+    <bpmn:sequenceFlow id="Flow_0r19i0g" sourceRef="initiate_battle" targetRef="Gateway_1b4s7tu" />
+    <bpmn:sequenceFlow id="Flow_1u7u3kz" name="not_tired" sourceRef="Gateway_1b4s7tu" targetRef="initiate_battle">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${isTired == false}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="Flow_125yi2r" name="tired" sourceRef="Gateway_1b4s7tu" targetRef="Activity_1hbyset">
+    <bpmn:sequenceFlow id="Flow_125yi2r" name="tired" sourceRef="Gateway_1b4s7tu" targetRef="throw_pokeball">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${isTired == true}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
+    <bpmn:userTask id="start_searching" name="start_searching">
+      <bpmn:incoming>Flow_1bpa9e2</bpmn:incoming>
+      <bpmn:outgoing>Flow_0i9mvrb</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="initiate_battle" name="initiate_battle">
+      <bpmn:incoming>Flow_0i9mvrb</bpmn:incoming>
+      <bpmn:incoming>Flow_1u7u3kz</bpmn:incoming>
+      <bpmn:outgoing>Flow_0r19i0g</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="throw_pokeball" name="throw_pokeball">
+      <bpmn:incoming>Flow_125yi2r</bpmn:incoming>
+      <bpmn:outgoing>Flow_1pxufv2</bpmn:outgoing>
+    </bpmn:userTask>
     <bpmn:textAnnotation id="TextAnnotation_08sofkl">
-      <bpmn:text>caputure complete</bpmn:text>
+      <bpmn:text>capture_successful</bpmn:text>
     </bpmn:textAnnotation>
     <bpmn:association id="Association_05hryrl" sourceRef="Event_1csv0ux" targetRef="TextAnnotation_08sofkl" />
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="pokemon_capture_rules">
       <bpmndi:BPMNShape id="TextAnnotation_08sofkl_di" bpmnElement="TextAnnotation_08sofkl">
-        <dc:Bounds x="990" y="70" width="100" height="41" />
+        <dc:Bounds x="990" y="85" width="140" height="30" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="179" y="159" width="36" height="36" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0h0qw9j_di" bpmnElement="Activity_0h0qw9j">
-        <dc:Bounds x="300" y="137" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_0w9qid3_di" bpmnElement="Activity_0w9qid3">
-        <dc:Bounds x="460" y="137" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Activity_1hbyset_di" bpmnElement="Activity_1hbyset">
-        <dc:Bounds x="780" y="137" width="100" height="80" />
-        <bpmndi:BPMNLabel />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1csv0ux_di" bpmnElement="Event_1csv0ux">
-        <dc:Bounds x="952" y="159" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Gateway_1b4s7tu_di" bpmnElement="Gateway_1b4s7tu" isMarkerVisible="true">
         <dc:Bounds x="665" y="152" width="50" height="50" />
@@ -70,9 +55,21 @@
           <dc:Bounds x="590" y="151" width="88" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1csv0ux_di" bpmnElement="Event_1csv0ux">
+        <dc:Bounds x="952" y="159" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1tabx4x_di" bpmnElement="start_searching">
+        <dc:Bounds x="300" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0g3p3w4_di" bpmnElement="initiate_battle">
+        <dc:Bounds x="460" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0iodmen_di" bpmnElement="throw_pokeball">
+        <dc:Bounds x="780" y="137" width="100" height="80" />
+      </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Association_05hryrl_di" bpmnElement="Association_05hryrl">
-        <di:waypoint x="981" y="163" />
-        <di:waypoint x="1020" y="111" />
+        <di:waypoint x="982" y="164" />
+        <di:waypoint x="1027" y="115" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_1bpa9e2_di" bpmnElement="Flow_1bpa9e2">
         <di:waypoint x="215" y="177" />

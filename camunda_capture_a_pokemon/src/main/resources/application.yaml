@@ -1,3 +1,6 @@
-camunda.bpm.admin-user:
-  id: admin
-  password: admin
+camunda.bpm:
+  admin-user:
+    id: admin
+    password: admin
+  filter:
+    create: All tasks
